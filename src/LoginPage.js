@@ -9,19 +9,38 @@ import {
 } from "react-native-responsive-dimensions";
 
 
+// fetch('https://dummyjson.com/auth/login', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+    
+//     username: 'kminchelle',
+//     password: '0lelplR',
+//     // expiresInMins: 60, // optional
+//   })
+// })
+// .then(res => res.json())
+// .then(console.log);
+
+
+
 const LoginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const login = async () => {
     try {
-      const response = await fetch('https://reqres.in/api/login', {
+        console.log(email, password);
+      const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        
         body: JSON.stringify({
-          "email": email,
-          "password": password
+        //   "email": user,
+        //   "password": password
+        username: email,
+        password: password,
           }
           ),
       });
@@ -33,6 +52,9 @@ const LoginPage = (props) => {
       props.navigation.navigate("HomePage");
       } else {
         // Login failed
+        Alert.alert("Invalid Credential")
+        console.log("Error in response")
+
         return { success: false, error: data.message };
       }
     } catch (error) {
